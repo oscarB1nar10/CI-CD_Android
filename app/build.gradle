@@ -19,15 +19,28 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("CI_CD_signig_key.jks")
+            storePassword "AndroidB1nar10.01xd1"
+            keyAlias "CI/CD"
+            keyPassword "AndroidB1nar10.01xd1"
+        }
+    }
+
     buildTypes {
+
         development {
             minifyEnabled false
             buildConfigField "String", "APP_CENTER_KEY", "\"960d7b63-6676-41d0-8ab8-9a69e5ac581a\""
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
