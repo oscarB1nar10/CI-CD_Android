@@ -1,6 +1,7 @@
 package com.example.ci_cd
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -12,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import com.example.ci_cd.ui.models.Retirement
 import com.example.ci_cd.ui.theme.CI_CDTheme
 import com.microsoft.appcenter.analytics.Analytics
-import java.lang.Exception
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                                     currentAge = currentAge.toInt(),
                                     retirementAge = plannedRetirementAge.toInt()
                                 )
-                                onCalculate(retirement)
+                                retiringMessage(onGetRetiringMessage(retirement))
                             },
                         ) {
                             Text(
@@ -115,7 +115,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun onCalculate(retirement: Retirement) {
+    private fun onGetRetiringMessage(retirement: Retirement): String {
         try {
             val appCenterProperties = HashMap<String, String>().apply {
                 put("interest_rate", retirement.interestRate.toString())
@@ -123,14 +123,28 @@ class MainActivity : ComponentActivity() {
             }
             if (retirement.interestRate <= 0) {
                 Analytics.trackEvent("Wrong interest rate", appCenterProperties)
+                return "Wrong interest rate"
             }
 
             if (retirement.retirementAge <= retirement.currentAge) {
                 Analytics.trackEvent("wrong age", appCenterProperties)
+                return "wrong age"
             }
+
+            return "You can request your retire"
         } catch (exception: Exception) {
             Analytics.trackEvent(exception.message.toString())
         }
+
+        return "You cant retire right now"
+    }
+
+    private fun retiringMessage(message: String) {
+        Toast.makeText(
+            this,
+            message,
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
 
