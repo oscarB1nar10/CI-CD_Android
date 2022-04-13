@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                             .wrapContentHeight()
                             .padding(horizontal = 16.dp)
                     ) {
+                        var retireAmount by remember { mutableStateOf(0.0f) }
                         var monthlySaving by remember { mutableStateOf("") }
 
                         OutlinedTextField(
@@ -103,11 +104,21 @@ class MainActivity : ComponentActivity() {
                                     retirementAge = plannedRetirementAge.toInt()
                                 )
                                 retiringMessage(onGetRetiringMessage(retirement))
+
+                                val remainingYears =
+                                    plannedRetirementAge.toInt() - currentAge.toInt()
+                                retireAmount =
+                                    getRetirementAmount(monthlySaving.toFloat(), remainingYears)
+
                             },
                         ) {
                             Text(
                                 text = "Calculate"
                             )
+                        }
+
+                        if (retireAmount > 0.0) {
+                            Text(text = "Retirement amount: $retireAmount")
                         }
                     }
                 }
@@ -137,6 +148,10 @@ class MainActivity : ComponentActivity() {
         }
 
         return "You cant retire right now"
+    }
+
+    private fun getRetirementAmount(monthlySaving: Float, remainingYears: Int): Float {
+        return (monthlySaving * 12) * remainingYears
     }
 
     private fun retiringMessage(message: String) {
