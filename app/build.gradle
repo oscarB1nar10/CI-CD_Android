@@ -46,6 +46,7 @@ android {
 
         release {
             minifyEnabled false
+            buildConfigField "String", "APP_CENTER_KEY", "\"071b006f-eb81-4e58-88fe-05173a2a55e5\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
