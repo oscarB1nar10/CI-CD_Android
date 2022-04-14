@@ -87,4 +87,14 @@ dependencies {
     // AppCenter for AC/CD
     implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
     implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
+
+    // Tests
+    androidTestImplementation 'androidx.test:core:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test:$compose_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+      // AppCenter Espresso
+    androidTestImplementation('com.microsoft.appcenter:espresso-test-extension:1.4')
 }
