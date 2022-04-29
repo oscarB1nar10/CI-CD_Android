@@ -4,7 +4,7 @@ try {
     node {
 
         stage('Preparation') {
-            git credentialsId: '24a11330-a387-470c-8268-d46cdfef2271', url: 'https://github.com/oscarB1nar10/CI-CD_Android.git'
+            git credentialsId: 'cd7b1a75-d47e-40a6-8420-a50fa6bde1be', url: 'https://github.com/oscarB1nar10/CI-CD_Android.git'
         }
 
         stage('Dependencies') {
