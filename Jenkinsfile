@@ -8,9 +8,6 @@ try {
         }
 
         stage('Dependencies') {
-                #sh 'sudo npm install -g react-native-cli'
-                #sh 'npm install'
-                #sh 'react-native link'
                 sh 'export JAVA_HOME=/opt/jdk1.8.0_201'
                 sh 'export JRE_HOME=/opt/jdk1.8.0_201/jre'
                 sh 'export PATH=$PATH:/opt/jdk1.8.0_201/bin:/opt/jdk1.8.0_201/jre/bin'
