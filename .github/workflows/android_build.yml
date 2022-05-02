@@ -13,10 +13,10 @@ jobs:
 
     # Steps
     steps:
-      - uses: actions/checkout@dev
+      - uses: actions/checkout@v1
         # Setup tooling and environment
       - name: Set Up JDK
-        uses: actions/setup-java@dev
+        uses: actions/setup-java@v1
         with:
           java-version: 1.8
 
