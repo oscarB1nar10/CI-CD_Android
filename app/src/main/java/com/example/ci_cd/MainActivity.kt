@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
                 if (hasCrashed) {
                     Toast.makeText(
                         this,
-                        "Oops, sorry for that",
+                        "Oops, sorry for that, my bad",
                         Toast.LENGTH_LONG
                     ).show()
                 }
