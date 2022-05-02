@@ -1,0 +1,29 @@
+# Action name
+name: Android Build
+
+# Actions to run when a pull request is performed
+on: pull_request
+
+# Tasks
+jobs:
+  build:
+
+    # Enviroment to tun
+    runs-on: ubuntu-latest
+
+    # Steps
+    steps:
+      - uses: actions/checkout@dev
+        # Setup tooling and environment
+      - name: Set Up JDK
+        uses: actions/setup-java@dev
+        with:
+          java-version: 1.8
+
+        # Define Android specific tasks
+      - name: Run Tests
+        run: ./gradlew test
+
+
+      - name: Build Project
+        run: ./gradlew assemble
