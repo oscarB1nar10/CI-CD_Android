@@ -27,3 +27,16 @@ jobs:
 
       - name: Build Project
         run: ./gradlew assemble
+
+  # Parallel job
+  android_tests:
+    runs-on: [ macos-latest ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Instrumentation Test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          script: ./gradlew connectedAndroidTest
+
+
