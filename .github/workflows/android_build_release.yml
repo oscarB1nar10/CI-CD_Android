@@ -1,0 +1,31 @@
+# Action name
+#name: Android Release
+
+# Actions to run when a push is performed on dev branch
+'''
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  apk:
+    name: Generate APK
+    runs-on: ubuntu-lastest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: "11"
+      - name: Set execution flag for Gradlew
+        run: chmod +x gradlew
+      - name: Build APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apkdebug/app-debug.apk
+'''
